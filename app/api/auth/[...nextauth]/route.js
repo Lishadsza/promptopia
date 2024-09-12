@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import GoogleProvider from 'next-auth/providers/google';
 import User from '@models/user';
 import  { connectToDB } from '@utils/database';
+import mongoose from 'mongoose';
 
 console.log({
 
@@ -9,17 +10,17 @@ console.log({
     clientSecret:process.env.GOOGLE_CSECRET,
 
 })
-import mongoose from 'mongoose';
 
-let isConnected=false;
+
+let isConnected = false;
 
 export const connecttoDB=async() =>{
     mongoose.set('strictQuery', true);
 }
 
 if(isConected){
-    console.log('MongoDB is already connected')
-    return;
+    console.log('MongoDB is already connected');
+      return;
 }
 
 try{
@@ -48,7 +49,7 @@ const handler=NextAuth({
 
 
      session.user.id=sessionUser._id.toString();
-     return session;
+        return session;
     },
     async signIn({profile}){
        try{
