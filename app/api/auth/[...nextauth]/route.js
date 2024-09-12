@@ -43,6 +43,7 @@ const handler=NextAuth({
             clientSecret:process.env.GOOGLE_CSECRET,
         }),
     ],
+    callbacks:{
     async session ({session}) {
      const sessionUser=await User.findOne({
         email:session.user.email
@@ -55,10 +56,12 @@ const handler=NextAuth({
     async signIn({profile}){
        try{
          await connectToDB();
+
+         /*checking if user exists*/
          const userExists=await User.findOne({
             email:profile.email
         });
-
+   /*if doesnt exist then create new*/
         if (!userExists){
             await User.create({
                 email:profile.email,
@@ -70,10 +73,11 @@ const handler=NextAuth({
 
          return true;
        }catch(error){
-        console.log(error);
+        console.log("Error checking if user exists:",error.message);
         return false;
 
        }
-    }
+    },
+}
 })
 export { handler as GET,handler as POST};
