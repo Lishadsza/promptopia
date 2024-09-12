@@ -11,8 +11,31 @@ const  CreatePrompt= () => {
     });
 
     const createPrompt=async(e)=>{
+      e.preventDefault();
 
-    }
+      setSubmitting(true);
+      try{
+        const respone=await fetch('/api/prompt/new',
+          {
+            method:'POST',
+            body:JSON.stringify({
+              prompt:post.prompt,
+              userId:session?.user.id,
+              tag:post.tag
+            })
+          })
+          if(respone.ok){
+            Router.push('/');
+          }
+      }catch(error){
+        console.log(error);
+      }finally{
+        setSubmitting(false);
+      }
+
+      }
+
+    
   return (
     <Form 
     type="Create"
@@ -21,7 +44,8 @@ const  CreatePrompt= () => {
     submitting={submitting}
     handLeSubmit={createPrompt}
    />
-  )
-}
+  );
+};
+
 
 export default CreatePrompt
