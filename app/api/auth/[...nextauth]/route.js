@@ -1,46 +1,47 @@
 import NextAuth from "next-auth";
 import GoogleProvider from 'next-auth/providers/google';
 import User from '@models/user';
-import  { connectToDB } from '@utils/database';
+import { connectToDB } from '@utils/database';
 import mongoose from 'mongoose';
 
 console.log({
-
-    clientId:process.env.GOOGLE_ID,
-    clientSecret:process.env.GOOGLE_CSECRET,
-
+    clientId: process.env.GOOGLE_ID,
+    clientSecret: process.env.GOOGLE_CSECRET,
 })
-
+  
+/* removed the local connection 
 
 let isConnected = false;
 
-export const connecttoDB=async() =>{
+export const connectToDB = async () => {
+ 
     mongoose.set('strictQuery', true);
-}
+    if (isConnected) {
+        console.log('MongoDB is already connected');
+        return;
+    }
 
-if(isConected){
-    console.log('MongoDB is already connected');
-      return;
-}
+    try {
+        await mongoose.connect(process.env.MONGODB_URI, {
+            dbName: "share_prompt",
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
 
-try{
-    await mongoose.connect(process.env.MONGODB_URI, {
-    dbName:"share_prompt",
-    useNewUrlParser:true,
-    useUnifiedTopology:true,
-    })
+        isConnected = true;
+        console.log('MongoDB connected');
+    } catch (error) {
+        console.error('MongoDB connection error:', error);
+    }
+};
+*/
 
-    isConnected=true;
-    console.log('MongoDB connected')
-} catch(error){
-
-}
 const handler=NextAuth({
     providers:[
         GoogleProvider({
             clientId:process.env.GOOGLE_ID,
             clientSecret:process.env.GOOGLE_CSECRET,
-        })
+        }),
     ],
     async session ({session}) {
      const sessionUser=await User.findOne({
