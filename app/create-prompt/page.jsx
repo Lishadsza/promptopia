@@ -38,11 +38,11 @@ const  CreatePrompt= () => {
     
   return (
     <Form 
-    type="Create"
-    post={post}
-    setPost={setPost}
-    submitting={submitting}
-    handLeSubmit={createPrompt}
+      type="Create"
+      post={post}
+      setPost={setPost}
+      submitting={submitting}
+      handLeSubmit={createPrompt}
    />
   );
 };
