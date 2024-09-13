@@ -1,7 +1,7 @@
-import { fromJSON } from "postcss";
+
 import mongoose,{ Schema,model,models} from 'mongoose';;
 
-const PromtSchema=new Schema({
+const PromptSchema=new Schema({
     creator:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',
@@ -15,5 +15,6 @@ const PromtSchema=new Schema({
         required:[true,'Tag is required.'],
     }
 });
-const Prompt=models.Prompt || model('Prompt',PromptSchema);;
+const Prompt=models.Prompt || model('Prompt',PromptSchema);
+
 export default Prompt;

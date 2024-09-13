@@ -36,7 +36,7 @@ const Form = ({type, post,setPost,submitting,handLeSubmit
            </label>
            <label> 
             <span className="font-satoshi font-semibold
-            text-base text-gray-700">Tag {` `}
+            text-base text-gray-700">Tag {" "}
 
 
             <span
@@ -67,7 +67,7 @@ const Form = ({type, post,setPost,submitting,handLeSubmit
             className="px-5 py-1.5 text-sm
             bg-primary-orange rounded-full text-white"
             >
-              {submitting ? `${type}...`:type}
+              {submitting ? `${type}ing...`:type}
             </button>
            </div>
           </form>
