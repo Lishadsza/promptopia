@@ -7,10 +7,7 @@ import {usePathname,useRouter} from 'next/navigation';
 
 const PromptCard = ({ post,handleTagClick,handleEdit,handleDelete}) => {
 
-  const creatorImage = post?.creator?.image || '/default-avatar.png'; 
-  const creatorUsername = post?.creator?.username || 'Unknown User'; 
-  const creatorEmail = post?.creator?.email || 'No Email'; 
-
+  
 
 
 
@@ -19,7 +16,7 @@ const PromptCard = ({ post,handleTagClick,handleEdit,handleDelete}) => {
       <div className='flex justify-between items-start gap-5'>
         <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
           <Image
-          src= {creatorImage}/*{post.creator.image}*/
+          src=  {post.creator?.image}
           alt="user_image"
           width={40}
           height={40}
@@ -27,9 +24,9 @@ const PromptCard = ({ post,handleTagClick,handleEdit,handleDelete}) => {
           />
           <div className="flex flex-col">
             <h3>
-              {creatorUsername}
-              </h3>  {/*{post.creator.username}*/}
-            <p>{creatorEmail}</p>  {/*{post.creator.email}*/}
+              {post.creator?.username}
+              </h3>  
+            <p> {post.creator?.email}</p> 
           </div>
         </div>
       </div>
