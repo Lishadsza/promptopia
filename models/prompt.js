@@ -6,7 +6,7 @@ const PromptSchema=new Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'User',
     },
-    promt:{
+    prompt:{
     type:String,
     required:[true,'Prompt is required.'],
     },

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-const Form = ({type, post,setPost,submitting,handLeSubmit
+const Form = ({type, post,setPost,submitting,handleSubmit
 }) => {
   return (
     <section className="w-full max-w-full flex-start
@@ -16,7 +16,7 @@ const Form = ({type, post,setPost,submitting,handLeSubmit
           let your imagination run wild with any AI-powered platform.
           </p> 
           <form
-            onSubmit={handLeSubmit}
+            onSubmit={handleSubmit}
             className="mt-10 w-full max-w-2x flex
             flex=col gap-7 glassmorphism">
            <label> 
