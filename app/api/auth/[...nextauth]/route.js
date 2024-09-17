@@ -2,12 +2,12 @@ import NextAuth from "next-auth";
 import GoogleProvider from 'next-auth/providers/google';
 import User from '@models/user';
 import { connectToDB } from '@utils/database';
-import mongoose from 'mongoose';
 
+/*
 console.log({
     clientId: process.env.GOOGLE_ID,
     clientSecret: process.env.GOOGLE_CSECRET,
-})
+})*/
   
 /* removed the local connection 
 
