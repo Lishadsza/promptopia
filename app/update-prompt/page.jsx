@@ -29,7 +29,7 @@ const EditPrompt= () => {
          if (promptId) getPromptDetails()
     },[promptId])
 
-    /* const createPrompt=async(e)=>{
+     const createPrompt=async(e)=>{
       e.preventDefault();
 
       setIsSubmitting(true);
@@ -53,7 +53,7 @@ const EditPrompt= () => {
       }
 
       };
-*/
+
     
   return (
     <Form 
