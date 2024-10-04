@@ -1,70 +1,73 @@
-'use client';
-import {useEffect,useState} from 'react'
-import {useSession} from 'next-auth/react';
-import {useRouter,useSearchParams} from 'next/navigation';
-import Form from '@components/Form';
-const EditPrompt= () => {
-      const router =useRouter();
-      const {data:session}=useSession();
-      const searchParams=useSearchParams();
-      const  promptId=searchParams.get('id');
+"use client";
 
+import { Suspense, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import Form from "@components/Form";
 
-    const [submitting,setSubmitting]=useState(false);
-    const[post,setPost]=useState({
-        prompt:'',
-        tag:''
-    });
+const UpdatePrompt = () => {
 
-    useEffect(()=>{
-         const getPromptDetails=async()=>{
-            const response = await fetch (`/api/prompt/${promptId}`)
-            const data=await response.json();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const promptId = searchParams.get("id");
+  const [post, setPost] = useState({ prompt: "", tag: "", });
+  const [submitting, setIsSubmitting] = useState(false);
 
-            setPost({
-                prompt:data.prompt,
-                tag:data.tag,
-            })
-         }
-         if (promptId) getPromptDetails()
-    },[promptId])
+  useEffect(() => {
+    const getPromptDetails = async () => {
+      const response = await fetch(`/api/prompt/${promptId}`);
+      const data = await response.json();
 
-     const createPrompt=async(e)=>{
-      e.preventDefault();
+      setPost({
+        prompt: data.prompt,
+        tag: data.tag,
+      });
+    };
 
-      setIsSubmitting(true);
-      try{
-        const respone=await fetch('/api/prompt/new',
-          {
-            method:'POST',
-            body:JSON.stringify({
-              prompt:post.prompt,
-              userId:session?.user.id,
-              tag:post.tag,
-            }),
-          })
-          if(respone.ok){
-            router.push('/');
-          }
-      }catch(error){
-        console.log(error);
-      }finally{
-        setIsSubmitting(false);
+    if (promptId) getPromptDetails();
+  }, [promptId]);
+
+  const updatePrompt = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    if (!promptId) return alert("PromptId not found!");
+
+    try {
+      const response = await fetch(`/api/prompt/${promptId}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          prompt: post.prompt,
+          tag: post.tag,
+        }),
+      });
+
+      if (response.ok) {
+        router.push("/");
       }
+    }
+    catch (error) {
+      console.log(error);
+    }
+    finally {
+      setIsSubmitting(false);
+    }
+  };
 
-      };
-
-    
   return (
-    <Form 
-      type="Create"
+    <Form
+      type='Edit'
       post={post}
       setPost={setPost}
       submitting={submitting}
-      handleSubmit={()=>{}}
-   />
+      handleSubmit={updatePrompt}
+    />
   );
 };
 
-
-export default EditPrompt
+export default function UpdatePrompt2() {
+  return (
+    <Suspense>
+      <UpdatePrompt></UpdatePrompt>
+    </Suspense>
+  )
+}
