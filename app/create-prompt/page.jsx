@@ -19,7 +19,7 @@ const  CreatePrompt= () => {
 
       setIsSubmitting(true);
       try{
-        const respone=await fetch('/api/prompt/new',
+        const response=await fetch('/api/prompt/new',
           {
             method:'POST',
             body:JSON.stringify({
@@ -28,7 +28,7 @@ const  CreatePrompt= () => {
               tag:post.tag,
             }),
           })
-          if(respone.ok){
+          if(response.ok){
             router.push('/');
           }
       }catch(error){

@@ -3,7 +3,9 @@ import GoogleProvider from 'next-auth/providers/google';
 import User from '@models/user';
 import { connectToDB } from '@utils/database';
 
-/*
+
+/* 
+  
 console.log({
     clientId: process.env.GOOGLE_ID,
     clientSecret: process.env.GOOGLE_CSECRET,
@@ -35,7 +37,7 @@ export const connectToDB = async () => {
     }
 };
 */
-
+ 
 const handler=NextAuth({
     providers:[
         GoogleProvider({
@@ -81,3 +83,8 @@ const handler=NextAuth({
 }
 })
 export { handler as GET,handler as POST};
+
+
+
+
+
